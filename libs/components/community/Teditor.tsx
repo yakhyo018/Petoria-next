@@ -8,6 +8,10 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { T } from '../../types/common';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import { Message } from '../../enums/common.enum';
+import { sweetTopSuccessAlert, sweetErrorHandling } from '../../sweetAlert';
+import { useMutation } from '@apollo/client';
+import { CREATE_BOARD_ARTICLE } from '../../../apollo/user/mutation';
 
 const TuiEditor = () => {
 	const editorRef = useRef<Editor>(null),
@@ -16,6 +20,7 @@ const TuiEditor = () => {
 	const [articleCategory, setArticleCategory] = useState<BoardArticleCategory>(BoardArticleCategory.FREE);
 
 	/** APOLLO REQUESTS **/
+	const [createBoardArticle] = useMutation(CREATE_BOARD_ARTICLE);
 
 	const memoizedValues = useMemo(() => {
 		const articleTitle = '',
@@ -62,8 +67,9 @@ const TuiEditor = () => {
 			memoizedValues.articleImage = responseImage;
 
 			return `${REACT_APP_API_URL}/${responseImage}`;
-		} catch (err) {
+		} catch (err: any) {
 			console.log('Error, uploadImage:', err);
+			await sweetErrorHandling(err);
 		}
 	};
 
@@ -76,11 +82,35 @@ const TuiEditor = () => {
 		memoizedValues.articleTitle = e.target.value;
 	};
 
-	const handleRegisterButton = async () => {};
+	const handleRegisterButton = async () => {
+		try {
+			const editor = editorRef.current;
+			const articleContent = editor?.getInstance().getHTML() as string;
+			memoizedValues.articleContent = articleContent;
 
-	const doDisabledCheck = () => {
-		if (memoizedValues.articleContent === '' || memoizedValues.articleTitle === '') {
-			return true;
+			// Bo'sh editor ham '<p><br></p>' qaytaradi, shuning uchun teglarsiz matnni tekshiramiz
+			const plainContent = articleContent?.replace(/<[^>]*>/g, '').trim();
+			const hasImage = articleContent?.includes('<img');
+			if (memoizedValues.articleTitle.trim() === '' || (!plainContent && !hasImage)) {
+				throw new Error(Message.INSERT_ALL_INPUTS);
+			}
+
+			await createBoardArticle({
+				variables: {
+					input: { ...memoizedValues, articleCategory },
+				},
+			});
+
+			await sweetTopSuccessAlert('Article is created successfully', 700);
+			await router.push({
+				pathname: '/mypage',
+				query: {
+					category: 'myArticles',
+				},
+			});
+		} catch (err: any) {
+			console.log(err);
+			sweetErrorHandling(err).then();
 		}
 	};
 
@@ -121,12 +151,11 @@ const TuiEditor = () => {
 			</Stack>
 
 			<Editor
-				initialValue={'Type here'}
+				initialValue={''}
 				placeholder={'Type here'}
 				previewStyle={'vertical'}
 				height={'640px'}
-				// @ts-ignore
-				initialEditType={'WYSIWYG'}
+				initialEditType={'wysiwyg'}
 				toolbarItems={[
 					['heading', 'bold', 'italic', 'strike'],
 					['image', 'table', 'link'],
@@ -136,7 +165,7 @@ const TuiEditor = () => {
 				hooks={{
 					addImageBlobHook: async (image: any, callback: any) => {
 						const uploadedImageURL = await uploadImage(image);
-						callback(uploadedImageURL);
+						if (uploadedImageURL) callback(uploadedImageURL);
 						return false;
 					},
 				}}
