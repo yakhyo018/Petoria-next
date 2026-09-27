@@ -16,6 +16,7 @@ import MyMenu from '../../libs/components/mypage/MyMenu';
 import WriteArticle from '../../libs/components/mypage/WriteArticle';
 import MemberFollowers from '../../libs/components/member/MemberFollowers';
 import { sweetErrorHandling } from '../../libs/sweetAlert';
+import { getJwtToken } from '../../libs/auth';
 import MemberFollowings from '../../libs/components/member/MemberFollowings';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -35,8 +36,9 @@ const MyPage: NextPage = () => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		if (!user._id) router.push('/').then();
-	}, [user]);
+		// Reload paytida userVar hali bo'sh bo'ladi (Layout uni keyinroq tiklaydi), shuning uchun tokenga qaraymiz
+		if (!getJwtToken()) router.push('/').then();
+	}, []);
 
 	/** HANDLERS **/
 	const subscribeHandler = async (id: string, refetch: any, query: any) => {

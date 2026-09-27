@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { Pagination, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
@@ -86,9 +86,9 @@ const MyProperties: NextPage = ({ initialInput, ...props }: any) => {
 		}
 	};
 
-	if (user?.memberType !== 'AGENT') {
-		router.back();
-	}
+	useEffect(() => {
+		if (user?._id && user?.memberType !== 'AGENT') router.back();
+	}, [user]);
 
 	if (device === 'mobile') {
 		return <div>NESTAR PROPERTIES MOBILE</div>;
