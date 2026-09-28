@@ -137,7 +137,7 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 													variant="outlined"
 													sx={{ background: '#ed5858', ':hover': { background: '#ee7171' } }}
 													onClick={() =>
-														unsubscribeHandler(follower?.followerData?._id, getMemberFollowersError, followInquiry)
+														unsubscribeHandler(follower?.followerData?._id, getMemberFollowersRefetch, followInquiry)
 													}
 												>
 													Unfollow
@@ -148,7 +148,7 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 												variant="contained"
 												sx={{ background: '#60eb60d4', ':hover': { background: '#60eb60d4' } }}
 												onClick={() =>
-													subscribeHandler(follower?.followerData?._id, getMemberFollowersData, followInquiry)
+													subscribeHandler(follower?.followerData?._id, getMemberFollowersRefetch, followInquiry)
 												}
 											>
 												Follow
