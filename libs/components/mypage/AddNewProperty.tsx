@@ -5,6 +5,8 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { PropertyLocation, PropertyType } from '../../enums/property.enum';
 import { REACT_APP_API_URL, propertySquare } from '../../config';
 import { PropertyInput } from '../../types/property/property.input';
+import { PropertyUpdate } from '../../types/property/property.update';
+import { Message } from '../../enums/common.enum';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
@@ -37,6 +39,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		variables: {
 			input: router.query.propertyId,
 		},
+		skip: !router.query.propertyId,
 	});
 
 	/** LIFECYCLES **/
@@ -152,11 +155,13 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 
 	const updatePropertyHandler = useCallback(async () => {
 		try {
-			// @ts-ignore
-			insertPropertyData._id = getPropertyData?.getProperty?._id;
-			const result = await updateProperty({
+			const propertyId = getPropertyData?.getProperty?._id;
+			if (!propertyId) throw new Error(Message.NO_DATA_FOUND);
+
+			const updateData: PropertyUpdate = { ...insertPropertyData, _id: propertyId };
+			await updateProperty({
 				variables: {
-					input: insertPropertyData,
+					input: updateData,
 				},
 			});
 
@@ -170,7 +175,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
 		}
-	}, [insertPropertyData]);
+	}, [insertPropertyData, getPropertyData]);
 
 	useEffect(() => {
 		if (user?._id && user?.memberType !== 'AGENT') router.back();
