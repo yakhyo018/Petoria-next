@@ -57,7 +57,7 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 
 	/** HANDLERS **/
 	const changePageHandler = async (event: unknown, newPage: number) => {
-		membersInquiry.page = newPage + 1;
+		membersInquiry.page = newPage + 1; //0
 		await getAllMembersRefetch({ input: membersInquiry });
 		setMembersInquiry({ ...membersInquiry });
 	};
@@ -87,13 +87,13 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 
 		switch (newValue) {
 			case 'ACTIVE':
-				setMembersInquiry({ ...membersInquiry, search: { memberStatus: MemberStatus.ACTIVE } });
+				setMembersInquiry({ ...membersInquiry, page: 1, search: { memberStatus: MemberStatus.ACTIVE } });
 				break;
 			case 'BLOCK':
-				setMembersInquiry({ ...membersInquiry, search: { memberStatus: MemberStatus.BLOCK } });
+				setMembersInquiry({ ...membersInquiry, page: 1, search: { memberStatus: MemberStatus.BLOCK } });
 				break;
 			case 'DELETE':
-				setMembersInquiry({ ...membersInquiry, search: { memberStatus: MemberStatus.DELETE } });
+				setMembersInquiry({ ...membersInquiry, page: 1, search: { memberStatus: MemberStatus.DELETE } });
 				break;
 			default:
 				delete membersInquiry?.search?.memberStatus;
@@ -280,7 +280,7 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 AdminUsers.defaultProps = {
 	initialInquiry: {
 		page: 1,
-		limit: 10,
+		limit: 3,
 		sort: 'createdAt',
 		search: {},
 	},

@@ -23,3 +23,5 @@ export const userVar = makeVar<CustomJwtPayload>({
 	memberWarnings: 0,
 	memberBlocks: 0,
 });
+// Server tomonda (SSR) va ulanish hali ochilmaganda undefined bo'ladi
+export const socketVar = makeVar<WebSocket | undefined>(undefined);
