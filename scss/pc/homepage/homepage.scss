@@ -650,7 +650,7 @@
 				}
 			}
 		}
-		.top-agents {
+		.top-sellers {
 			position: relative;
 			padding: 153px 0px 135px;
 			width: 100%;
@@ -683,7 +683,7 @@
 							width: 14px;
 							height: 14px;
 						}
-						&.swiper-agents-next {
+						&.swiper-sellers-next {
 							transform: rotate(180deg);
 						}
 					}
@@ -692,18 +692,18 @@
 						height: 280px;
 						display: flex;
 						flex-direction: row;
-						.top-agents-swiper {
+						.top-sellers-swiper {
 							width: 99.7%;
 							height: 280px;
 							display: flex;
 							flex-direction: row;
-							.top-agents-slide {
+							.top-sellers-slide {
 								width: auto;
 								height: auto;
 								display: flex;
 							}
 						}
-						.top-agent-card {
+						.top-seller-card {
 							width: 205px;
 							height: 280px;
 							display: flex;

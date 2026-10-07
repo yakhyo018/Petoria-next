@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import ProductBigCard from '../../libs/components/common/ProductBigCard';
-import ReviewCard from '../../libs/components/agent/ReviewCard';
+import ReviewCard from '../../libs/components/seller/ReviewCard';
 import { Box, Button, Pagination, Stack, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
@@ -29,17 +29,17 @@ export const getStaticProps = async ({ locale }: any) => ({
 	},
 });
 
-const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) => {
+const SellerDetail: NextPage = ({ initialInput, initialComment, ...props }: any) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
-	const [agentId, setAgentId] = useState<string | null>(null);
-	const [agent, setAgent] = useState<Member | null>(null);
+	const [sellerId, setSellerId] = useState<string | null>(null);
+	const [seller, setSeller] = useState<Member | null>(null);
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(initialInput);
-	const [agentProducts, setAgentProducts] = useState<Product[]>([]);
+	const [sellerProducts, setSellerProducts] = useState<Product[]>([]);
 	const [productTotal, setProductTotal] = useState<number>(0);
 	const [commentInquiry, setCommentInquiry] = useState<CommentsInquiry>(initialComment);
-	const [agentComments, setAgentComments] = useState<Comment[]>([]);
+	const [sellerComments, setSellerComments] = useState<Comment[]>([]);
 	const [commentTotal, setCommentTotal] = useState<number>(0);
 	const [insertCommentData, setInsertCommentData] = useState<CommentInput>({
 		commentGroup: CommentGroup.MEMBER,
@@ -58,10 +58,10 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 		refetch: getMemberRefetch,
 	} = useQuery(GET_MEMBER, {
 		fetchPolicy: 'network-only',
-		variables: { input: agentId },
-		skip: !agentId,
+		variables: { input: sellerId },
+		skip: !sellerId,
 		onCompleted: (data: T) => {
-			setAgent(data?.getMember);
+			setSeller(data?.getMember);
 			setSearchFilter({
 				...searchFilter,
 				search: {
@@ -92,7 +92,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 		skip: !searchFilter.search.memberId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setAgentProducts(data?.getProducts?.list);
+			setSellerProducts(data?.getProducts?.list);
 			setProductTotal(data?.getProducts?.metaCounter[0]?.total ?? 0);
 		},
 	});
@@ -108,13 +108,13 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 		skip: !commentInquiry.search.commentRefId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setAgentComments(data?.getComments?.list);
+			setSellerComments(data?.getComments?.list);
 			setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
 		},
 	});
 	/** LIFECYCLES **/
 	useEffect(() => {
-		if (router.query.agentId) setAgentId(router.query.agentId as string);
+		if (router.query.sellerId) setSellerId(router.query.sellerId as string);
 	}, [router]);
 
 	/** HANDLERS **/
@@ -138,7 +138,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 	const createCommentHandler = async () => {
 		try {
 			if (!user._id) throw new Error(Messages.error2);
-			if (user._id === agentId) throw new Error('Cannot write a review for yourself');
+			if (user._id === sellerId) throw new Error('Cannot write a review for yourself');
 
 			await createComment({
 				variables: {
@@ -171,27 +171,27 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 	};
 
 	if (device === 'mobile') {
-		return <div>AGENT DETAIL PAGE MOBILE</div>;
+		return <div>SELLER DETAIL PAGE MOBILE</div>;
 	} else {
 		return (
-			<Stack className={'agent-detail-page'}>
+			<Stack className={'seller-detail-page'}>
 				<Stack className={'container'}>
-					<Stack className={'agent-info'}>
+					<Stack className={'seller-info'}>
 						<img
-							src={agent?.memberImage ? `${REACT_APP_API_URL}/${agent?.memberImage}` : '/img/profile/defaultUser.svg'}
+							src={seller?.memberImage ? `${REACT_APP_API_URL}/${seller?.memberImage}` : '/img/profile/defaultUser.svg'}
 							alt=""
 						/>
-						<Box component={'div'} className={'info'} onClick={() => redirectToMemberPageHandler(agent?._id as string)}>
-							<strong>{agent?.memberFullName ?? agent?.memberNick}</strong>
+						<Box component={'div'} className={'info'} onClick={() => redirectToMemberPageHandler(seller?._id as string)}>
+							<strong>{seller?.memberFullName ?? seller?.memberNick}</strong>
 							<div>
 								<img src="/img/icons/call.svg" alt="" />
-								<span>{agent?.memberPhone}</span>
+								<span>{seller?.memberPhone}</span>
 							</div>
 						</Box>
 					</Stack>
-					<Stack className={'agent-home-list'}>
+					<Stack className={'seller-home-list'}>
 						<Stack className={'card-wrap'}>
-							{agentProducts.map((product: Product) => {
+							{sellerProducts.map((product: Product) => {
 								return (
 									<div className={'wrap-main'} key={product?._id}>
 										<ProductBigCard product={product} likeProductHandler={likeProductHandler} key={product?._id} />
@@ -236,7 +236,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 										{commentTotal} review{commentTotal > 1 ? 's' : ''}
 									</span>
 								</Box>
-								{agentComments?.map((comment: Comment) => {
+								{sellerComments?.map((comment: Comment) => {
 									return <ReviewCard comment={comment} key={comment?._id} />;
 								})}
 								<Box component={'div'} className={'pagination-box'}>
@@ -290,7 +290,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 	}
 };
 
-AgentDetail.defaultProps = {
+SellerDetail.defaultProps = {
 	initialInput: {
 		page: 1,
 		limit: 9,
@@ -309,4 +309,4 @@ AgentDetail.defaultProps = {
 	},
 };
 
-export default withLayoutBasic(AgentDetail);
+export default withLayoutBasic(SellerDetail);
