@@ -38,3 +38,7 @@ Before making any changes, read (paths relative to this repo):
 ```bash
 yarn install
 ```
+
+## Skills
+
+Reusable workflows: `skills/frontend-migration/SKILL.md`, `skills/product-ui/SKILL.md`, `skills/user-project/SKILL.md`, `skills/admin-project/SKILL.md` (see `SKILLS.md`).
