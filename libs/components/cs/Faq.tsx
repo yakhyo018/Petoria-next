@@ -58,26 +58,26 @@ const Faq = () => {
 			{
 				id: '00f5a45ed8897f8090116a22',
 				subject: 'What types of products do you offer?',
-				content: 'We offer single-family homes, condos, townhouses, apartments, and penthouses',
+				content: 'We offer pets, pet food, toys and accessories for dogs, cats, birds and fish.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a21',
 				subject: 'How can I search for products on your website?',
-				content: 'Simply use our search bar to enter location, price range, bedrooms/bathrooms, and product type.',
+				content: 'Simply use our search bar to filter by location, price range, product type, species and gender.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a23',
-				subject: 'Do you provide assistance for first-time homebuyers?',
-				content: 'Yes, we guide you through the process and help find suitable financing.',
+				subject: 'Do you provide assistance for first-time pet owners?',
+				content: 'Yes, our sellers guide you in choosing the right pet and the essentials it needs.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a24',
 				subject: 'What should I consider when buying a product?',
-				content: 'Location, condition, size, amenities, and future development plans.',
+				content: 'Species, age, health, care needs, and whether the pet suits your home and lifestyle.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a25',
-				subject: 'How long does the home-buying process typically take?',
+				subject: 'How long does delivery or pickup typically take?',
 				content: 'Usually 3 to 6 days, depending on various factors.',
 			},
 			{
@@ -87,8 +87,8 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a28',
-				subject: 'Do you offer products in specific neighborhoods?',
-				content: 'Yes, we have listings in various neighborhoods based on your preferences.',
+				subject: 'Do you offer products in specific cities?',
+				content: 'Yes, you can filter listings by city based on your preferences.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a27',
@@ -97,15 +97,15 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116b99',
-				subject: 'What if I need help understanding legal aspects of product purchase?',
-				content: 'Our team can provide basic guidance and recommend legal professionals if needed.',
+				subject: 'What if I need help with pet registration or vaccinations?',
+				content: 'Our team can provide basic guidance and recommend veterinarians if needed.',
 			},
 		],
 		payment: [
 			{
 				id: '00f5a45ed8897f8090116a02',
 				subject: 'How can I make the payment?',
-				content: 'you make the payment through an seller!',
+				content: 'you make the payment through a seller!',
 			},
 			{
 				id: '00f5a45ed8897f8090116a91',
@@ -162,25 +162,25 @@ const Faq = () => {
 			{
 				id: '00f5a45ed8897f8090116a03',
 				subject: 'What should buyers pay attention to?',
-				content: 'Buyers should check and decide whether the product they want to buy or rent is actually suitable!',
+				content: 'Buyers should check and decide whether the product they want to buy is actually suitable for their pet!',
 			},
 			{
 				id: '00f5a45ed8897f8090116a85',
 				subject: 'How can I determine if a product is within my budget?',
 				content:
-					'Calculate your budget by considering your income, down payment, and potential mortgage payments. Our sellers can assist you within your budget.',
+					'Consider the purchase price plus ongoing costs such as food, grooming and vet visits. Our sellers can assist you within your budget.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a84',
 				subject: 'What documents do I need to provide when purchasing a product?',
 				content:
-					"You'll typically need identification, proof of income, bank statements, and any necessary loan documentation. Our team will guide you through.",
+					"For most products no documents are needed. For pets, sellers may ask for identification and provide health and vaccination records.",
 			},
 			{
 				id: '00f5a45ed8897f8090116a83',
-				subject: 'What factors should I consider when choosing a neighborhood?',
+				subject: 'What factors should I consider when choosing a pet?',
 				content:
-					'Consider factors such as location, safety, schools, amenities, transportation, and future development plans.',
+					'Consider space at home, time for care and exercise, allergies, budget, and the expected lifespan of the pet.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a82',
@@ -192,13 +192,13 @@ const Faq = () => {
 				id: '00f5a45ed8897f8090116a81',
 				subject: 'What are some red flags to watch out for when viewing products?',
 				content:
-					'Watch out for signs of structural damage, water damage, mold, outdated systems, and undesirable neighborhood conditions.',
+					'Watch out for signs of illness, missing health records, poor living conditions, and damaged or expired products.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a80',
-				subject: 'Do you provide assistance with product inspections?',
+				subject: 'Do you provide assistance with pet health checks?',
 				content:
-					'Yes, we can recommend reputable inspectors and accompany you during product inspections to identify any potential issues.',
+					'Yes, we can recommend reputable veterinarians to check a pet before purchase.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a79',
@@ -208,9 +208,9 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a78',
-				subject: 'What are the advantages of using a real estate seller when buying a product?',
+				subject: 'What are the advantages of buying from a verified seller?',
 				content:
-					'Real estate sellers provide expertise, negotiation skills, and guidance throughout the buying process, ultimately saving you time and hassle.',
+					'Verified sellers provide healthy pets, quality products, and care advice, saving you time and hassle.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a77',
@@ -223,19 +223,19 @@ const Faq = () => {
 		sellers: [
 			{
 				id: '00f5a45ed8897f8090116a04',
-				subject: 'What do I need to do if I want to become an seller?',
+				subject: 'What do I need to do if I want to become a seller?',
 				content:
-					'If you really decide to become an seller, you should read our terms and conditions and contact the admin!',
+					'If you really decide to become a seller, you should read our terms and conditions and contact the admin!',
 			},
 			{
 				id: '00f5a45ed8897f8090116a62',
-				subject: 'What qualifications do I need to become a real estate seller?',
-				content: 'Complete pre-licensing course, pass licensing exam, meet state requirements.',
+				subject: 'What qualifications do I need to become a pet seller?',
+				content: 'Follow local animal welfare rules, keep health records, and register your business where required.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a63',
-				subject: 'How do I find clients as a new real estate seller?',
-				content: 'Build network, use online/offline marketing, join reputable brokerage.',
+				subject: 'How do I find clients as a new seller?',
+				content: 'Post clear photos and descriptions, respond quickly, and build reviews from happy customers.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a64',
@@ -250,7 +250,7 @@ const Faq = () => {
 			{
 				id: '00f5a45ed8897f8090116a66',
 				subject: 'What should I do to stay updated with market trends and changes?',
-				content: 'Attend industry events, follow real estate news, participate in training.',
+				content: 'Attend pet industry events, follow pet care news, participate in training.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a67',
@@ -260,17 +260,17 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a68',
-				subject: 'What tools and technologies should I utilize as a real estate seller?',
-				content: 'Use CRM software, virtual tours, digital marketing tools, and mobile apps.',
+				subject: 'What tools and technologies should I utilize as a seller?',
+				content: 'Use quality photos, videos, digital marketing tools, and mobile apps.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a69',
-				subject: 'How do I ensure compliance with real estate laws and regulations?',
+				subject: 'How do I ensure compliance with pet trade laws and regulations?',
 				content: 'Stay updated with laws, attend education courses, consult legal professionals.',
 			},
 			{
 				id: '00f5a45ed8897f8090116a70',
-				subject: 'What strategies can I use to grow my real estate business?',
+				subject: 'What strategies can I use to grow my pet business?',
 				content: 'Build relationships, provide exceptional service, seek referrals, and continuously improve skills.',
 			},
 		],
@@ -422,7 +422,7 @@ const Faq = () => {
 			},
 			{
 				id: '00f5a45ed8897f8090116a31',
-				subject: 'Do you host events or webinars related to real estate?',
+				subject: 'Do you host events or webinars related to pet care?',
 				content: "We're not hosting events or webinars at this time.",
 			},
 			{

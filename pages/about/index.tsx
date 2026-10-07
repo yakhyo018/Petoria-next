@@ -15,13 +15,12 @@ const About: NextPage = () => {
 				<Stack className={'intro'}>
 					<Stack className={'container'}>
 						<Stack className={'left'}>
-							<strong>We're on a Mission to Change View of Real Estate Field.</strong>
+							<strong>We're on a Mission to Make Pet Shopping Simple and Safe.</strong>
 						</Stack>
 						<Stack className={'right'}>
 							<p>
-								It doesn’t matter how organized you are — a surplus of toys will always ensure your house is a mess
-								waiting to happen. Fortunately, getting kids on board with the idea of ditching their stuff is a lot
-								easier than it sounds.
+								Petoria connects pet lovers with trusted sellers of pets, food, toys and accessories. Every listing
+								shows species, type and location, so you can quickly find what fits your pet.
 								<br />
 								<br />
 								Maecenas quis viverra metus, et efficitur ligula. Nam congue augue et ex congue, sed luctus lectus
@@ -33,7 +32,7 @@ const About: NextPage = () => {
 									<div>
 										<img src="/img/icons/garden.svg" alt="" />
 									</div>
-									<span>Modern Villa</span>
+									<span>Healthy Pets</span>
 									<p>Nullam sollicitudin blandit Nullam maximus.</p>
 								</div>
 								<div className={'box'}>

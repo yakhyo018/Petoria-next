@@ -295,7 +295,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						{productType.map((type: string) => {
 							return (
 								<div
-									style={{ backgroundImage: `url(/img/banner/types/${type.toLowerCase()}.webp)` }}
+									style={{ backgroundImage: `url(/img/banner/types/${type.toLowerCase()}.svg)` }}
 									onClick={() => productTypeSelectHandler(type)}
 									key={type}
 								>
