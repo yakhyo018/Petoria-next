@@ -1,0 +1,335 @@
+/** PET HERO (homepage) **/
+
+.pet-hero {
+	position: relative;
+	width: 100%;
+	padding: 150px 0 70px;
+	overflow: hidden;
+
+	&__blob {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(10px);
+		pointer-events: none;
+		&--one {
+			top: -120px;
+			right: -80px;
+			width: 520px;
+			height: 520px;
+			background: radial-gradient(circle at 30% 30%, rgba($sun, 0.55), rgba($sun, 0) 70%);
+		}
+		&--two {
+			top: 180px;
+			left: -200px;
+			width: 380px;
+			height: 380px;
+			background: radial-gradient(circle at 60% 40%, rgba($mint, 0.35), rgba($mint, 0) 70%);
+		}
+	}
+
+	&__paws {
+		position: absolute;
+		inset: 0;
+		background-image: url('/img/banner/pawPattern.svg');
+		background-size: 200px 220px;
+		opacity: 0.7;
+		pointer-events: none;
+	}
+
+	&__inner {
+		position: relative;
+		flex-direction: row !important;
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+	}
+
+	&__copy {
+		max-width: 560px;
+		color: #fff;
+		font-family: $font;
+
+		h1 {
+			margin: 22px 0 18px;
+			font-size: 56px;
+			line-height: 1.08;
+			font-weight: 700;
+			letter-spacing: -1px;
+			em {
+				display: block;
+				font-style: normal;
+				color: $cream;
+				opacity: 0.92;
+			}
+		}
+
+		p {
+			margin: 0;
+			max-width: 460px;
+			font-size: 18px;
+			line-height: 1.6;
+			color: rgba(255, 255, 255, 0.9);
+		}
+	}
+
+	&__eyebrow {
+		@include liquid-glass(rgba(255, 255, 255, 0.1), 999px, 12px);
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 8px 16px;
+		font-size: 14px;
+		font-weight: 600;
+		letter-spacing: 0.4px;
+	}
+
+	&__actions {
+		margin-top: 32px;
+		display: flex;
+		gap: 14px;
+
+		button {
+			height: 54px;
+			padding: 0 30px;
+			font-family: $font;
+			font-size: 16px;
+			font-weight: 600;
+			border-radius: 999px;
+			border: none;
+		}
+	}
+
+	&__cta {
+		color: $coral;
+		background: #fff;
+		cursor: pointer;
+		box-shadow: 0 12px 28px rgba(160, 50, 30, 0.28);
+		transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 16px 34px rgba(160, 50, 30, 0.36);
+		}
+	}
+
+	&__ghost {
+		@include liquid-glass(rgba(255, 255, 255, 0.08), 999px, 14px);
+		@include liquid-glass-interactive;
+		color: #fff;
+	}
+
+	&__species {
+		margin-top: 34px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	&__chip {
+		@include liquid-glass(rgba(255, 255, 255, 0.08), 999px, 12px);
+		@include liquid-glass-interactive;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 10px 18px;
+		color: #fff;
+		font-family: $font;
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	&__visual {
+		position: relative;
+		width: 520px;
+		height: 470px;
+		flex-shrink: 0;
+	}
+
+	&__badge {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 230px;
+		height: 230px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform: translate(-50%, -50%);
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 70%);
+		box-shadow: 0 0 0 18px rgba(255, 255, 255, 0.08), 0 0 0 40px rgba(255, 255, 255, 0.05);
+		img {
+			width: 170px;
+			height: 170px;
+			filter: drop-shadow(0 18px 30px rgba(120, 30, 20, 0.35));
+		}
+	}
+
+	&__type {
+		@include liquid-glass(rgba(255, 255, 255, 0.12), 22px, 16px);
+		@include liquid-glass-interactive;
+		position: absolute;
+		width: 210px;
+		padding: 10px;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		text-align: left;
+		color: #fff;
+		font-family: $font;
+		animation: pet-hero-float 6s ease-in-out infinite;
+
+		&--1 {
+			top: 10px;
+			left: 0;
+		}
+		&--2 {
+			top: 40px;
+			right: 0;
+			animation-delay: -1.5s;
+		}
+		&--3 {
+			bottom: 40px;
+			left: 10px;
+			animation-delay: -3s;
+		}
+		&--4 {
+			bottom: 0;
+			right: 10px;
+			animation-delay: -4.5s;
+		}
+	}
+
+	&__type-art {
+		width: 58px;
+		height: 58px;
+		flex-shrink: 0;
+		border-radius: 16px;
+		background-size: cover;
+		background-position: right center;
+	}
+
+	&__type-text {
+		display: flex;
+		flex-direction: column;
+		strong {
+			font-size: 17px;
+			font-weight: 600;
+		}
+		small {
+			margin-top: 2px;
+			font-size: 13px;
+			color: rgba(255, 255, 255, 0.85);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		&__type {
+			animation: none;
+		}
+	}
+}
+
+@keyframes pet-hero-float {
+	0%,
+	100% {
+		translate: 0 0;
+	}
+	50% {
+		translate: 0 -10px;
+	}
+}
+
+/** PET PROMO (replaces the real-estate video) **/
+
+.pet-promo {
+	position: relative;
+	width: 100%;
+	padding: 90px 0;
+	overflow: hidden;
+	background: linear-gradient(120deg, $mint 0%, #3fb8a5 45%, $sky 100%);
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url('/img/banner/pawPattern.svg');
+		background-size: 200px 220px;
+		opacity: 0.6;
+	}
+
+	.container {
+		position: relative;
+		flex-direction: row !important;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__card {
+		@include liquid-glass(rgba(255, 255, 255, 0.1), 32px, 20px);
+		max-width: 640px;
+		padding: 44px 48px;
+		color: #fff;
+		font-family: $font;
+
+		span {
+			font-size: 14px;
+			font-weight: 600;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			opacity: 0.9;
+		}
+		h2 {
+			margin: 12px 0 14px;
+			font-size: 40px;
+			line-height: 1.15;
+			font-weight: 700;
+		}
+		p {
+			margin: 0 0 26px;
+			font-size: 17px;
+			line-height: 1.6;
+			opacity: 0.92;
+		}
+		button {
+			height: 52px;
+			padding: 0 28px;
+			border: none;
+			border-radius: 999px;
+			color: $mint;
+			background: #fff;
+			font-family: $font;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+			&:hover {
+				transform: translateY(-2px);
+			}
+		}
+	}
+
+	&__stats {
+		display: flex;
+		gap: 18px;
+	}
+
+	&__stat {
+		@include liquid-glass(rgba(255, 255, 255, 0.1), 24px, 16px);
+		width: 150px;
+		padding: 26px 18px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: #fff;
+		font-family: $font;
+		strong {
+			font-size: 30px;
+			font-weight: 700;
+		}
+		small {
+			margin-top: 4px;
+			font-size: 14px;
+			opacity: 0.9;
+		}
+	}
+}

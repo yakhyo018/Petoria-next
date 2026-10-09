@@ -1,8 +1,10 @@
 /** IMPORTS **/
 @import '/scss/variables.scss';
 @import '/scss/pc/general.scss';
+@import '/scss/pc/glass.scss';
 
 @import '/scss/pc/homepage/homepage';
+@import '/scss/pc/homepage/petHero.scss';
 
 @import '/scss/pc/product/product';
 @import '/scss/pc/product/detail.scss';
@@ -57,8 +59,16 @@ body::-webkit-scrollbar {
 				z-index: 99;
 				align-items: center;
 				border-top: 1px solid rgba(255, 255, 255, 0.07);
+				transition: background-color 0.3s ease;
 				&.transparent {
-					background-color: #181a209e;
+					@include liquid-glass(rgba(24, 26, 32, 0.55), 0px, 20px);
+					position: fixed;
+					background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%),
+						rgba(24, 26, 32, 0.74);
+					border-top: none;
+					border-left: none;
+					border-right: none;
+					border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 				}
 				.container {
 					flex-direction: row;
@@ -178,12 +188,12 @@ body::-webkit-scrollbar {
 	.header-main {
 		position: relative;
 		width: 100%;
-		height: 860px;
-		background-image: url('/img/banner/header1.svg');
-		background-size: cover;
+		height: auto;
+		padding-bottom: 70px;
+		background: linear-gradient(135deg, $coral 0%, #f0805f 45%, $peach 100%);
 		.container {
 			position: relative;
-			margin-top: 20px;
+			margin-top: 0;
 			flex-direction: column;
 			align-items: center;
 			.search-box {
@@ -195,8 +205,8 @@ body::-webkit-scrollbar {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-				background: rgba(255, 255, 255, 0.28);
-				border-radius: 12px;
+				@include liquid-glass(rgba(255, 255, 255, 0.12), 28px, 20px);
+				box-sizing: border-box;
 				.select-box {
 					width: 712px;
 					display: flex;
@@ -210,10 +220,14 @@ body::-webkit-scrollbar {
 						flex-direction: row;
 						align-items: center;
 						justify-content: space-between;
-						border-radius: 12px;
-						background: rgba(255, 255, 255, 0.575);
+						border-radius: 999px;
+						background: rgba(255, 255, 255, 0.72);
 						box-sizing: border-box;
 						cursor: pointer;
+						transition: background-color 0.25s ease, box-shadow 0.25s ease;
+						&:hover {
+							background: rgba(255, 255, 255, 0.9);
+						}
 						&.on {
 							background: #ffffff;
 							border: 1px solid #000;
@@ -261,8 +275,12 @@ body::-webkit-scrollbar {
 						align-items: center;
 						justify-content: center;
 						border-radius: 55px;
-						background: #f17742;
+						background: $ink;
 						cursor: pointer;
+						transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+						&:hover {
+							transform: scale(1.08);
+						}
 						svg {
 							width: 20px;
 							height: 20px;
@@ -416,16 +434,21 @@ body::-webkit-scrollbar {
 	.header-basic {
 		position: relative;
 		width: 100%;
-		height: 557px;
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
-		background: black;
+		background: url('/img/banner/pawPattern.svg') 0 0 / 200px 220px,
+			linear-gradient(135deg, $coral 0%, #f0805f 50%, $peach 100%);
+		height: 420px;
 		&.auth {
 			height: 300px;
 		}
 		.container {
-			margin-top: 175px;
+			margin-top: 165px;
+			width: fit-content;
+			height: fit-content;
+			padding: 26px 40px;
+			@include liquid-glass(rgba(255, 255, 255, 0.1), 28px, 16px);
 			strong {
 				color: #fff;
 				font-family: $font;

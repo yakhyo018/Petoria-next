@@ -1,41 +1,38 @@
 import React from 'react';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
+import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
 
 const Advertisement = () => {
-	const device = useDeviceDetect();
+	const router = useRouter();
 
-	if (device == 'mobile') {
-		return (
-			<Stack className={'video-frame'}>
-				<video
-					autoPlay
-					muted
-					loop
-					playsInline
-					preload="auto"
-					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-				>
-					<source src="/video/ads.mov" type="video/mp4" />
-				</video>
+	return (
+		<Stack className={'pet-promo'}>
+			<Stack className={'container'}>
+				<div className={'pet-promo__card'}>
+					<span>Healthy pets, happy homes</span>
+					<h2>New friends and fresh supplies every week</h2>
+					<p>Browse pets, food, toys and accessories from verified sellers near you.</p>
+					<button type="button" onClick={() => router.push('/product')}>
+						Explore the shop
+					</button>
+				</div>
+				<div className={'pet-promo__stats'}>
+					<div className={'pet-promo__stat'}>
+						<strong>4</strong>
+						<small>Species</small>
+					</div>
+					<div className={'pet-promo__stat'}>
+						<strong>9</strong>
+						<small>Cities</small>
+					</div>
+					<div className={'pet-promo__stat'}>
+						<strong>24/7</strong>
+						<small>Live chat</small>
+					</div>
+				</div>
 			</Stack>
-		);
-	} else {
-		return (
-			<Stack className={'video-frame'}>
-				<video
-					autoPlay
-					muted
-					loop
-					playsInline
-					preload="auto"
-					style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-				>
-					<source src="/video/ads.mov" type="video/mp4" />
-				</video>
-			</Stack>
-		);
-	}
+		</Stack>
+	);
 };
 
 export default Advertisement;

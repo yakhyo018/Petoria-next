@@ -24,61 +24,51 @@ const withLayoutBasic = (Component: any) => {
 
 		const memoizedValues = useMemo(() => {
 			let title = '',
-				desc = '',
-				bgImage = '';
+				desc = '';
 
 			switch (router.pathname) {
 				case '/product':
 					title = 'Product Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/products.png';
 					break;
 				case '/seller':
 					title = 'Sellers';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/sellers.webp';
 					break;
 				case '/seller/detail':
 					title = 'Seller Page';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/mypage':
 					title = 'my page';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/header1.svg';
 					break;
 				case '/community':
 					title = 'Community';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
 					desc = 'Authentication Process';
-					bgImage = '/img/banner/header2.svg';
 					setAuthHeader(true);
 					break;
 				case '/member':
 					title = 'Member Page';
 					desc = 'Home / Pet Shop';
-					bgImage = '/img/banner/header1.svg';
 					break;
 				default:
 					break;
 			}
 
-			return { title, desc, bgImage };
+			return { title, desc };
 		}, [router.pathname]);
 
 		/** LIFECYCLES **/
@@ -125,11 +115,6 @@ const withLayoutBasic = (Component: any) => {
 
 						<Stack
 							className={`header-basic ${authHeader && 'auth'}`}
-							style={{
-								backgroundImage: `url(${memoizedValues.bgImage})`,
-								backgroundSize: 'cover',
-								boxShadow: 'inset 10px 40px 150px 40px rgb(24 22 36)',
-							}}
 						>
 							<Stack className={'container'}>
 								<strong>{t(memoizedValues.title)}</strong>

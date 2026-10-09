@@ -1,0 +1,54 @@
+/** LIQUID GLASS
+ * Web version of Apple's Liquid Glass (see .claude/skills/swiftui-expert-skill/references/liquid-glass.md):
+ * translucent blurred surface, bright top edge, soft specular highlight, optional tint.
+ * `liquid-glass-interactive` is only for elements that respond to input (buttons, chips, links).
+ **/
+
+@mixin liquid-glass($tint: rgba(255, 255, 255, 0.14), $radius: 24px, $blur: 18px) {
+	position: relative;
+	isolation: isolate;
+	border-radius: $radius;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.06) 60%), $tint;
+	-webkit-backdrop-filter: blur($blur) saturate(180%);
+	backdrop-filter: blur($blur) saturate(180%);
+	border: 1px solid rgba(255, 255, 255, 0.42);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+		0 12px 32px rgba(24, 26, 32, 0.16);
+
+	&::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		pointer-events: none;
+		background: radial-gradient(120% 70% at 18% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 55%);
+		opacity: 0.75;
+	}
+
+	@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+		background: rgba(255, 255, 255, 0.85);
+	}
+}
+
+@mixin liquid-glass-interactive {
+	cursor: pointer;
+	transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+
+	&:hover {
+		transform: translateY(-2px) scale(1.03);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 16px 36px rgba(24, 26, 32, 0.22);
+	}
+
+	&:active {
+		transform: scale(0.97);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+		&:hover,
+		&:active {
+			transform: none;
+		}
+	}
+}
