@@ -57,7 +57,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 	const [searchFilter, setSearchFilter] = useState<CommentsInquiry>({
 		...initialInput,
 	});
-	const [memberImage, setMemberImage] = useState<string>('/img/community/articleImg.png');
+	const [memberImage, setMemberImage] = useState<string>('/img/profile/defaultUser.svg');
 	const [anchorEl, setAnchorEl] = useState<any | null>(null);
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
@@ -216,7 +216,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 
 	const getCommentMemberImage = (imageUrl: string | undefined) => {
 		if (imageUrl) return `${process.env.REACT_APP_API_URL}/${imageUrl}`;
-		else return '/img/community/articleImg.png';
+		else return '/img/profile/defaultUser.svg';
 	};
 
 	const goMemberPage = (id: any) => {

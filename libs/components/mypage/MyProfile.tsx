@@ -81,9 +81,12 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 		try {
 			if (!user._id) throw new Error(Messages.error2);
 			updateData._id = user._id;
+			const input = { ...updateData };
+			// Never send an empty or local (default) avatar path to the backend
+			if (!input.memberImage || !input.memberImage.startsWith('uploads/')) delete input.memberImage;
 			const result = await updateMember({
 				variables: {
-					input: updateData,
+					input,
 				},
 			});
 
@@ -101,8 +104,7 @@ const MyProfile: NextPage = ({ initialValues, ...props }: any) => {
 		if (
 			updateData.memberNick === '' ||
 			updateData.memberPhone === '' ||
-			updateData.memberAddress === '' ||
-			updateData.memberImage === ''
+			updateData.memberAddress === ''
 		) {
 			return true;
 		}

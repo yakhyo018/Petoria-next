@@ -87,24 +87,23 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 				variables: { input: id },
 			});
 
-			await getProductRefetch({ input: id });
-			await getProductsRefetch({
-				input: {
-					page: 1,
-					limit: 4,
-					sort: 'createdAt',
-					direction: Direction.DESC,
-					search: {
-						locationList: product?.productLocation ? [product?.productLocation] : [],
-					},
-				},
-			});
+			// The clicked product may be a similar product, so refetch the page's own product by productId
+			await getProductRefetch({ input: productId });
+			await getProductsRefetch({ input: similarProductsInput });
 
 			await sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			console.log('ERROR, likeProductHandler:', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
+	};
+
+	const similarProductsInput = {
+		page: 1,
+		limit: 4,
+		sort: 'createdAt',
+		direction: Direction.DESC,
+		search: product?.productLocation ? { locationList: [product.productLocation] } : {},
 	};
 
 	const {
@@ -114,18 +113,8 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		refetch: getProductsRefetch,
 	} = useQuery(GET_PRODUCTS, {
 		fetchPolicy: 'cache-and-network',
-		variables: {
-			input: {
-				page: 1,
-				limit: 4,
-				sort: 'createdAt',
-				direction: Direction.DESC,
-				search: {
-					locationList: [product?.productLocation],
-				},
-			},
-		},
-		skip: !productId && !product,
+		variables: { input: similarProductsInput },
+		skip: !product,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			if (data?.getProducts?.list) setDestinationProducts(data?.getProducts?.list);
@@ -139,14 +128,16 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 		refetch: getCommentsRefetch,
 	} = useQuery(GET_COMMENTS, {
 		fetchPolicy: 'cache-and-network',
-		variables: { input: initialComment },
+		variables: { input: commentInquiry },
 		skip: !commentInquiry.search.commentRefId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			if (data?.getComments?.list) setProductComments(data?.getComments?.list);
-			setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
-		},
 	});
+
+	useEffect(() => {
+		if (!getCommentsData?.getComments) return;
+		setProductComments(getCommentsData.getComments.list ?? []);
+		setCommentTotal(getCommentsData.getComments.metaCounter?.[0]?.total ?? 0);
+	}, [getCommentsData]);
 
 	const createCommentHandler = async () => {
 		try {
@@ -177,12 +168,6 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 			});
 		}
 	}, [router]);
-
-	useEffect(() => {
-		if (commentInquiry.search.commentRefId) {
-			getCommentsRefetch({ input: commentInquiry });
-		}
-	}, [commentInquiry]);
 
 	/** HANDLERS **/
 	const changeImageHandler = (image: string) => {
@@ -268,7 +253,12 @@ const ProductDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className="button-box">
 											{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-												<FavoriteIcon color="primary" fontSize={'medium'} />
+												<FavoriteIcon
+													color="primary"
+													fontSize={'medium'}
+													// @ts-ignore
+													onClick={() => likeProductHandler(user, product?._id)}
+												/>
 											) : (
 												<FavoriteBorderIcon
 													fontSize={'medium'}

@@ -67,7 +67,7 @@ const TopProductCard = (props: TopProductCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{product?.productViews}</Typography>
-							<IconButton color={'default'}>
+							<IconButton color={'default'} onClick={() => likeProductHandler(user, product?._id)}>
 								{product?.meLiked && product?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (
